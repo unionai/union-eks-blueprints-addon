@@ -1,0 +1,34 @@
+{
+  "name": "@union-ai/eks-blueprints-addon",
+  "version": "1.0.0",
+  "description": "Union AI addon for AWS EKS Blueprints",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "aws",
+    "eks",
+    "blueprints",
+    "union-ai",
+    "kubernetes"
+  ],
+  "author": "Union AI",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "@aws-quickstart/eks-blueprints": "^1.0.0",
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0"
+  },
+  "devDependencies": {
+    "@aws-quickstart/eks-blueprints": "^1.0.0",
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist"
+  ]
+}
