@@ -1,5 +1,5 @@
 {
-  "name": "@union-ai/eks-blueprints-addon",
+  "name": "@union-ai/union-eks-blueprints-addon",
   "version": "1.0.0",
   "description": "Union AI addon for AWS EKS Blueprints",
   "main": "dist/index.js",
