@@ -5,7 +5,7 @@ Union addon for AWS EKS Blueprints CDK.
 ## Installation
 
 ```bash
-npm install @union-ai/union-eks-blueprints-addon
+npm install @unionai/union-eks-blueprints-addon
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm install @union-ai/union-eks-blueprints-addon
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import * as blueprints from "@aws-quickstart/eks-blueprints"
-import * as union from "@union-ai/union-eks-blueprints-addon"
+import * as union from "@unionai/union-eks-blueprints-addon"
 
 const app = new cdk.App();
 
