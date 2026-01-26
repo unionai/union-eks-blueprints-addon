@@ -29,14 +29,9 @@ export interface UnionDataplaneAddOnProps extends blueprints.HelmAddOnUserProps 
   readonly s3BucketProviderName: string;
 
   /*
-   * Name of Client ID Secret in Secrets Manager
+   * Name of combined Union Client ID and Client Secret Secret in Secrets Manager
    */
-  readonly clientIdSecretName: string;
-
-  /*
-   * Name of Client Secret Secret in Secrets Manager
-   */
-  readonly clientSecretSecretName: string;
+  readonly unionSecretName: string
 
   /*
    * CDK Creates the Namespace for you
@@ -86,12 +81,17 @@ export class UnionDataplaneAddOn extends blueprints.HelmAddOn {
     unionRole.addManagedPolicy(unionPolicy);
 
     let values = await populateValues(this.options, clusterInfo, clusterInfo.cluster.stack.region, bucket, unionRole.roleArn);
-    values = merge(values, this.options.values ?? {})
+    values = merge(values, this.options.values ?? {});
     const chart = this.addHelmChart(clusterInfo, values, this.options.createNamespace);
 
     return Promise.resolve(chart);
   }
 
+}
+
+function getJsonSecret(secretString: string, key?: string): string {
+  const parsed = JSON.parse(secretString);
+  return key ? parsed[key] : parsed;
 }
 
 /**
@@ -101,12 +101,10 @@ export class UnionDataplaneAddOn extends blueprints.HelmAddOn {
 * @param region Region of the stack
 */
 async function populateValues(options: UnionDataplaneAddOnProps, clusterInfo: blueprints.ClusterInfo, region: string, bucket: IBucket, roleArn: string): Promise<blueprints.Values> {
-  const [clientId, clientSecret] = await Promise.all([
-    blueprints.utils.getSecretValue(options.clientIdSecretName, region),
-    blueprints.utils.getSecretValue(options.clientSecretSecretName, region)
-  ]);
+  const unionSecretString = await blueprints.utils.getSecretValue(options.unionSecretName, region);
 
-
+  const clientId = getJsonSecret(unionSecretString, "clientId");
+  const clientSecret = getJsonSecret(unionSecretString, "clientSecret");
 
   return {
     global: {
