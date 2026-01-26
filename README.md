@@ -29,7 +29,7 @@ const unionBlueprint = blueprints.AutomodeBuilder.builder({})
   new union.UnionDataplaneAddOn({
     s3BucketProviderName: 'union-bucket',
     clusterName: "<YOUR_UNION_CLUSTER_NAME>",
-    unionClientSecretName: "<YOUR_UNION_SECRET_NAME>",
+    unionSecretName: "<YOUR_UNION_SECRET_NAME>",
     host: "<YOUR_UNION_CONTROL_PLANE_HOST>",
     orgName: "<YOUR_ORG_NAME>"
   })
