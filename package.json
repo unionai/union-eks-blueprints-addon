@@ -1,6 +1,6 @@
 {
   "name": "@unionai/union-eks-blueprints-addon",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Union AI addon for AWS EKS Blueprints",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
